@@ -1,1327 +1,162 @@
 "use strict";
 
-/* =========================================================
-   JAHNAVI PORTFOLIO - MAIN JAVASCRIPT
-   ========================================================= */
-
-
-/* =========================================================
-   HELPER FUNCTIONS
-   ========================================================= */
-
-const $ = (selector, parent = document) =>
-  parent.querySelector(selector);
-
-const $$ = (selector, parent = document) =>
-  [...parent.querySelectorAll(selector)];
-
-const reduceMotion = window.matchMedia(
-  "(prefers-reduced-motion: reduce)"
-).matches;
-
-
-/* =========================================================
-   PORTFOLIO DATA
-   ========================================================= */
+const $ = (selector, parent = document) => parent.querySelector(selector);
+const $$ = (selector, parent = document) => [...parent.querySelectorAll(selector)];
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 const skills = [
-  {
-    group: "Programming",
-    items: [
-      ["Python", 75],
-      ["Java", 65],
-      ["C", 70]
-    ]
-  },
-
-  {
-    group: "Computer Science",
-    items: [
-      ["Data Structures and Algorithms", 70],
-      ["DBMS", 70]
-    ]
-  },
-
-  {
-    group: "Web Development",
-    items: [
-      ["HTML", 85],
-      ["CSS", 80],
-      ["JavaScript", 70],
-      ["Web Development", 75]
-    ]
-  },
-
-  {
-    group: "Tools & Technologies",
-    items: [
-      ["Git", 70],
-      ["GitHub", 70],
-      ["DevOps Basics", 55]
-    ]
-  }
+  { group: "Programming", items: [["Python",75],["Java",65],["C",70]] },
+  { group: "Computer Science", items: [["Data Structures and Algorithms",70],["DBMS",70]] },
+  { group: "Web Development", items: [["HTML",85],["CSS",80],["JavaScript",70],["Web Development",75]] },
+  { group: "Tools / Technologies", items: [["Git",70],["GitHub",70],["DevOps Basics",55]] }
 ];
-
 
 const projects = [
+  {name:"EventMood",cat:"AI",label:"AI / NLP",area:"NLP, emotion detection",desc:"An NLP-based emotion detection project that analyzes text and identifies emotions using a pretrained language model."},
+  {name:"Product Sentiment Analysis",cat:"AI",label:"AI / Machine Learning",area:"Machine Learning, text analysis",desc:"An AI/ML-based application that analyzes product-related text and identifies sentiment."},
+  {name:"Music Recommendation System",cat:"Data",label:"Data / Recommendation System",area:"TF-IDF, cosine similarity",desc:"A music recommendation system that uses TF-IDF and cosine similarity to identify and recommend similar songs."},
+  {name:"AgriSmart",cat:"Web",label:"Web / Agriculture",area:"Web application, crop recommendation",desc:"A practical agriculture-focused web application designed to provide crop recommendation support through a simple user interface."},
+  {name:"AI Office Suite",cat:"AI",label:"AI / Productivity",area:"AI-powered office tools",desc:"An AI-powered office suite concept bringing documents, presentations, spreadsheets, letters and other productivity modules into one application."}
+];
+const projFilters = ["All","AI","Web","Data"];
 
-  {
-    name: "EventMood",
-    cat: "AI",
-    label: "AI / NLP",
-    area: "Emotion Detection",
-    desc:
-      "An NLP-based emotion detection project that analyzes text and identifies emotions using a pretrained language model."
-  },
-
-  {
-    name: "Product Sentiment Analysis",
-    cat: "AI",
-    label: "AI / Machine Learning",
-    area: "Sentiment Analysis",
-    desc:
-      "An AI and machine-learning based project that analyzes product-related text and identifies sentiment."
-  },
-
-  {
-    name: "Music Recommendation System",
-    cat: "Data",
-    label: "Data / Recommendation",
-    area: "TF-IDF, Cosine Similarity",
-    desc:
-      "A music recommendation system that uses TF-IDF and cosine similarity to identify and recommend similar songs."
-  },
-
-  {
-    name: "AgriSmart",
-    cat: "Web",
-    label: "Web / Agriculture",
-    area: "Crop Recommendation",
-    desc:
-      "A web-based agricultural application designed to provide useful crop-related recommendations and information."
-  },
-
-  {
-    name: "AI Office Suite",
-    cat: "AI",
-    label: "AI / Productivity",
-    area: "AI-powered Office Tools",
-    desc:
-      "An AI-powered office productivity application containing modules for documents, presentations, spreadsheets, letters, projects and files."
-  }
-
+const certTopics = ["Python","C","Data Structures","Design Thinking","Business Skills","Machine Learning","Feature Engineering","Artificial Intelligence","Quantum Computing","Web Development"];
+const achievements = ["Internship achievements","Technical achievements","Hackathons","Other certifications"];
+const experiences = [
+  {role:"Web Development Internship",tech:"HTML, CSS, JavaScript"},
+  {role:"AI / ML Internship",tech:"AI / Machine Learning"},
+  {role:"AI and Deep Learning Internship",tech:"AI, Deep Learning"},
+  {role:"Other technical internship experience",tech:"Technical projects and development"}
 ];
 
+function setGreeting(){
+  const el=$("#greeting");
+  if(!el) return;
+  const h=new Date().getHours();
+  el.textContent=`${h<12?"Good morning":h<18?"Good afternoon":"Good evening"}, welcome to my portfolio`;
+}
 
-const projectFilters = [
-  "All",
-  "AI",
-  "Web",
-  "Data"
-];
-
-
-const certificationTopics = [
-  "Python",
-  "C",
-  "Data Structures",
-  "Design Thinking",
-  "Business Skills",
-  "Machine Learning",
-  "Feature Engineering",
-  "Artificial Intelligence",
-  "Quantum Computing",
-  "Web Development"
-];
-
-
-/* =========================================================
-   GREETING
-   ========================================================= */
-
-function setGreeting() {
-
-  const greeting = $("#greeting");
-
-  if (!greeting) return;
-
-  const hour = new Date().getHours();
-
-  let word;
-
-  if (hour < 12) {
-    word = "Good morning";
-  } else if (hour < 18) {
-    word = "Good afternoon";
-  } else {
-    word = "Good evening";
+function startTyping(){
+  const el=$("#typed");
+  if(!el || reduceMotion) return;
+  const words=["Computer Science Engineering Student","Web Developer","AI Enthusiast"];
+  let w=0,c=0,deleting=false;
+  function tick(){
+    const word=words[w];
+    c += deleting ? -1 : 1;
+    el.textContent=word.slice(0,c);
+    let speed=deleting?40:80;
+    if(!deleting && c===word.length){deleting=true;speed=1500;}
+    else if(deleting && c===0){deleting=false;w=(w+1)%words.length;speed=350;}
+    setTimeout(tick,speed);
   }
-
-  greeting.textContent =
-    `${word}, welcome to my portfolio`;
-
+  tick();
 }
 
+function renderSkills(){
+  const grid=$("#skillGrid");
+  if(!grid) return;
+  grid.innerHTML=skills.map(group=>`<div class="col-md-6"><article class="glass p-4 h-100"><h3 class="h5 mb-3">${group.group}</h3><div class="skill-list">${group.items.map(([name,level])=>`<div class="skill"><span>${name}</span><div class="bar" aria-label="${name} skill level ${level} percent"><i data-w="${level}"></i></div></div>`).join("")}</div></article></div>`).join("");
+}
 
-/* =========================================================
-   TYPING EFFECT
-   ========================================================= */
+function makeFilters(box,list,onPick){
+  if(!box) return;
+  box.innerHTML=list.map((f,i)=>`<button type="button" class="btn btn-outline-glow btn-sm${i===0?" active":""}" data-f="${f}" aria-pressed="${i===0}">${f}</button>`).join("");
+  box.addEventListener("click",event=>{
+    const button=event.target.closest("button[data-f]");
+    if(!button) return;
+    $$('button[data-f]',box).forEach(b=>{const active=b===button;b.classList.toggle("active",active);b.setAttribute("aria-pressed",String(active));});
+    onPick(button.dataset.f);
+  });
+}
 
-function startTyping() {
+function renderProjects(){
+  const grid=$("#projGrid");
+  if(!grid) return;
+  grid.innerHTML=projects.map((p,i)=>`<div class="col-md-6 proj" data-cat="${p.cat}"><article class="glass proj-card"><span class="badge badge-glow align-self-start mb-2">${p.label}</span><h3 class="h4">${p.name}</h3><p>${p.desc}</p><p class="tag"><strong>Area:</strong> ${p.area}</p><div class="d-flex gap-2 flex-wrap"><button type="button" class="btn btn-glow btn-sm" data-project-index="${i}">View Project</button></div></article></div>`).join("");
+  makeFilters($("#projFilters"),projFilters,filter=>{
+    let shown=0;
+    $$(".proj",grid).forEach(card=>{const show=filter==="All"||card.dataset.cat===filter;card.classList.toggle("hide",!show);if(show){shown++;card.classList.add("fade-in");}});
+    const old=$("#noProj"); if(old) old.remove();
+    if(!shown) grid.insertAdjacentHTML("beforeend",`<p id="noProj" class="col-12 text-center text-muted">No projects in this category yet.</p>`);
+  });
+  grid.addEventListener("click",event=>{
+    const button=event.target.closest("button[data-project-index]");
+    if(!button) return;
+    const project=projects[Number(button.dataset.projectIndex)];
+    $("#modalTitle").textContent=project.name;
+    $("#modalCat").textContent=project.label;
+    $("#modalDesc").textContent=project.desc;
+    if(window.bootstrap) bootstrap.Modal.getOrCreateInstance($("#projModal")).show();
+  });
+}
 
-  const el =
-    $("#typedRole") ||
-    $("#typed");
-
-  if (!el) return;
-
-  const words = [
-    "Computer Science Engineering Student",
-    "Web Developer",
-    "AI Enthusiast"
-  ];
-
-  if (reduceMotion) {
-
-    el.textContent = words[0];
-
-    return;
+function renderCerts(){
+  const ach=$("#achGrid"), cert=$("#certGrid"), exp=$("#expList");
+  if(ach) ach.innerHTML=achievements.map(a=>`<div class="col-sm-6 col-lg-3"><article class="glass p-3 h-100"><h3 class="h6">${a}</h3><p class="small mb-0">Add details here</p></article></div>`).join("");
+  if(cert){
+    cert.innerHTML=certTopics.map(t=>`<div class="col-sm-6 col-lg-4 cert-item" data-t="${t}"><article class="glass cert"><h3 class="h6 mb-1">${t}</h3><small>Organization, date and ID: add details</small></article></div>`).join("");
+    makeFilters($("#certFilters"),["All",...certTopics],filter=>$$('.cert-item',cert).forEach(card=>card.classList.toggle("hide",filter!=="All"&&card.dataset.t!==filter)));
   }
-
-  let wordIndex = 0;
-  let characterIndex = 0;
-  let deleting = false;
-
-  function type() {
-
-    const word = words[wordIndex];
-
-    if (deleting) {
-
-      characterIndex--;
-
-    } else {
-
-      characterIndex++;
-
-    }
-
-    el.textContent =
-      word.substring(0, characterIndex);
-
-
-    let speed = deleting ? 45 : 80;
-
-
-    if (!deleting &&
-        characterIndex === word.length) {
-
-      deleting = true;
-      speed = 1800;
-
-    }
-
-
-    if (deleting &&
-        characterIndex === 0) {
-
-      deleting = false;
-
-      wordIndex =
-        (wordIndex + 1) % words.length;
-
-      speed = 400;
-
-    }
-
-
-    setTimeout(type, speed);
-  }
-
-  type();
-
+  if(exp) exp.innerHTML=experiences.map(x=>`<li><article class="glass"><h3 class="h5">${x.role}</h3><p class="mb-0"><strong>Technologies:</strong> ${x.tech}</p></article></li>`).join("");
 }
 
-
-/* =========================================================
-   RENDER SKILLS
-   ========================================================= */
-
-function renderSkills() {
-
-  const grid = $("#skillGrid");
-
-  if (!grid) return;
-
-  let html = "";
-
-
-  skills.forEach(group => {
-
-    html += `
-      <div class="col-md-6">
-
-        <article class="card-box h-100">
-
-          <h3 class="h5 mb-4">
-            ${group.group}
-          </h3>
-
-          <div class="skill-list">
-    `;
-
-
-    group.items.forEach(([name, level]) => {
-
-      html += `
-        <div class="skill mb-3">
-
-          <div class="d-flex justify-content-between mb-1">
-
-            <span>
-              ${name}
-            </span>
-
-            <small>
-              ${level}%
-            </small>
-
-          </div>
-
-          <div
-            class="bar"
-            aria-label="${name} skill level ${level}%"
-          >
-
-            <i
-              data-w="${level}"
-              style="width: 0%"
-            ></i>
-
-          </div>
-
-        </div>
-      `;
-
-    });
-
-
-    html += `
-          </div>
-
-        </article>
-
-      </div>
-    `;
-
-  });
-
-
-  grid.innerHTML = html;
-
+function countUp(el){
+  if(!el || el.dataset.done) return;
+  el.dataset.done="1";
+  const end=Number(el.dataset.count), decimals=String(el.dataset.count).includes(".")?2:0;
+  if(reduceMotion){el.textContent=end.toFixed(decimals);return;}
+  let value=0;const step=()=>{value+=end/40;if(value>=end){el.textContent=end.toFixed(decimals);return;}el.textContent=value.toFixed(decimals);requestAnimationFrame(step)};step();
 }
 
-
-/* =========================================================
-   FILTER BUTTON CREATOR
-   ========================================================= */
-
-function makeFilters(box, list, callback) {
-
-  if (!box) return;
-
-
-  box.innerHTML = list.map(
-    (item, index) => `
-      <button
-        type="button"
-        class="btn btn-outline-custom btn-sm filter-btn ${
-          index === 0 ? "active" : ""
-        }"
-        data-filter="${item}"
-        aria-pressed="${index === 0}"
-      >
-        ${item}
-      </button>
-    `
-  ).join("");
-
-
-  box.addEventListener("click", event => {
-
-    const button =
-      event.target.closest("button[data-filter]");
-
-    if (!button) return;
-
-
-    $$("button", box).forEach(btn => {
-
-      const active =
-        btn === button;
-
-      btn.classList.toggle(
-        "active",
-        active
-      );
-
-      btn.setAttribute(
-        "aria-pressed",
-        active
-      );
-
-    });
-
-
-    callback(button.dataset.filter);
-
-  });
-
+function initScroll(){
+  const sections=$("main");
+  if(!sections) return;
+  const revealObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add("show");$$('[data-w]',entry.target).forEach(bar=>bar.style.width=`${bar.dataset.w}%`);$$('[data-count]',entry.target).forEach(countUp);}}),{threshold:.12});
+  $$('main section').forEach(section=>{section.classList.add("reveal");revealObserver.observe(section);});
+  const links=$$(".nav-link");
+  const spy=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting)links.forEach(link=>link.classList.toggle("active",link.getAttribute("href")==="#"+entry.target.id));}),{rootMargin:"-40% 0px -50% 0px"});
+  $$('main section').forEach(section=>spy.observe(section));
+  const updateProgress=()=>{const max=document.documentElement.scrollHeight-innerHeight;$("#progress").style.width=`${max>0?(scrollY/max)*100:0}%`;$("#topBtn").hidden=scrollY<500};
+  addEventListener("scroll",updateProgress,{passive:true});updateProgress();
+  $("#topBtn").addEventListener("click",()=>scrollTo({top:0,behavior:reduceMotion?"auto":"smooth"}));
+  $$(".navbar-nav .nav-link").forEach(link=>link.addEventListener("click",()=>{const menu=$("#menu");if(menu.classList.contains("show")&&window.bootstrap)bootstrap.Collapse.getOrCreateInstance(menu).hide();}));
 }
 
-
-/* =========================================================
-   RENDER PROJECTS
-   ========================================================= */
-
-function renderProjects() {
-
-  const grid = $("#projGrid");
-
-  if (!grid) return;
-
-
-  grid.innerHTML = projects.map(
-    (project, index) => `
-
-      <div
-        class="col-md-6 proj"
-        data-cat="${project.cat}"
-      >
-
-        <article class="card-box project-card h-100">
-
-          <span class="badge mb-3">
-            ${project.label}
-          </span>
-
-          <h3 class="h4">
-            ${project.name}
-          </h3>
-
-          <p>
-            ${project.desc}
-          </p>
-
-          <p>
-            <strong>Area:</strong>
-            ${project.area}
-          </p>
-
-          <div class="d-flex gap-2 flex-wrap">
-
-            <button
-              type="button"
-              class="btn btn-primary-custom btn-sm project-view"
-              data-index="${index}"
-            >
-              View Project
-            </button>
-
-          </div>
-
-        </article>
-
-      </div>
-    `
-  ).join("");
-
-
-  /* Project filters */
-
-  makeFilters(
-    $("#projFilters"),
-    projectFilters,
-    filterProjects
-  );
-
-
-  /* Project modal */
-
-  grid.addEventListener("click", event => {
-
-    const button =
-      event.target.closest(
-        ".project-view"
-      );
-
-    if (!button) return;
-
-
-    const index =
-      Number(button.dataset.index);
-
-    const project =
-      projects[index];
-
-
-    const title =
-      $("#modalTitle");
-
-    const category =
-      $("#modalCat");
-
-    const description =
-      $("#modalDesc");
-
-
-    if (title)
-      title.textContent =
-        project.name;
-
-    if (category)
-      category.textContent =
-        project.label;
-
-    if (description)
-      description.textContent =
-        project.desc;
-
-
-    const modalElement =
-      $("#projModal");
-
-    if (
-      modalElement &&
-      window.bootstrap
-    ) {
-
-      const modal =
-        bootstrap.Modal.getOrCreateInstance(
-          modalElement
-        );
-
-      modal.show();
-
-    }
-
-  });
-
-}
-
-
-/* =========================================================
-   PROJECT FILTER
-   ========================================================= */
-
-function filterProjects(filter) {
-
-  const cards =
-    $$(".proj");
-
-  let visible = 0;
-
-
-  cards.forEach(card => {
-
-    const match =
-      filter === "All" ||
-      card.dataset.cat === filter;
-
-
-    card.classList.toggle(
-      "hide",
-      !match
-    );
-
-
-    if (match) {
-
-      visible++;
-
-      if (!reduceMotion) {
-
-        card.classList.add(
-          "fade-in"
-        );
-
-      }
-
-    }
-
-  });
-
-
-  let noProject =
-    $("#noProj");
-
-
-  if (!noProject) {
-
-    noProject =
-      document.createElement("p");
-
-    noProject.id =
-      "noProj";
-
-    noProject.className =
-      "hide";
-
-    noProject.textContent =
-      "No projects found.";
-
-    const grid =
-      $("#projGrid");
-
-    if (grid)
-      grid.appendChild(noProject);
-
-  }
-
-
-  noProject.classList.toggle(
-    "hide",
-    visible > 0
-  );
-
-}
-
-
-/* =========================================================
-   RENDER CERTIFICATIONS
-   ========================================================= */
-
-function renderCertifications() {
-
-  const grid =
-    $("#certGrid");
-
-  if (!grid) return;
-
-
-  grid.innerHTML =
-    certificationTopics.map(
-      topic => `
-
-        <div
-          class="col-sm-6 col-lg-4 cert-item"
-          data-topic="${topic}"
-        >
-
-          <article class="card-box h-100">
-
-            <div class="cert-icon">
-              <i class="bi bi-award"></i>
-            </div>
-
-            <h3 class="h6">
-              ${topic}
-            </h3>
-
-            <p class="small mb-0">
-              Certification / course area
-            </p>
-
-          </article>
-
-        </div>
-
-      `
-    ).join("");
-
-
-  makeFilters(
-    $("#certFilters"),
-    ["All", ...certificationTopics],
-    filterCertifications
-  );
-
-}
-
-
-/* =========================================================
-   CERTIFICATION FILTER
-   ========================================================= */
-
-function filterCertifications(filter) {
-
-  $$(".cert-item").forEach(item => {
-
-    const match =
-      filter === "All" ||
-      item.dataset.topic === filter;
-
-
-    item.classList.toggle(
-      "hide",
-      !match
-    );
-
-  });
-
-}
-
-
-/* =========================================================
-   CONTACT FORM VALIDATION
-   ========================================================= */
-
-function initForm() {
-
-  const form =
-    $("#contactForm");
-
-  if (!form) return;
-
-
-  const rules = {
-
-    name: value => {
-
-      if (!value.trim()) {
-
-        return "Please enter your name.";
-
-      }
-
-      return "";
-
-    },
-
-
-    email: value => {
-
-      if (!value.trim()) {
-
-        return "Please enter your email.";
-
-      }
-
-
-      const valid =
-        /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
-          .test(value.trim());
-
-
-      if (!valid) {
-
-        return "Enter a valid email address.";
-
-      }
-
-      return "";
-
-    },
-
-
-    subject: value => {
-
-      if (!value.trim()) {
-
-        return "Please enter a subject.";
-
-      }
-
-      return "";
-
-    },
-
-
-    message: value => {
-
-      if (!value.trim()) {
-
-        return "Please write a message.";
-
-      }
-
-      return "";
-
-    }
-
+function initForm(){
+  const form=$("#contactForm"); if(!form) return;
+  const rules={
+    name:value=>value.trim()?"":"Please enter your name.",
+    email:value=>!value.trim()?"Please enter your email.":/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value.trim())?"":"Enter a valid email like name@example.com.",
+    subject:value=>value.trim()?"":"Please enter a subject.",
+    message:value=>value.trim()?"":"Please write a message."
   };
-
-
-  function validateField(id) {
-
-    const input =
-      $("#" + id);
-
-    if (!input) return false;
-
-
-    const error =
-      rules[id](input.value);
-
-
-    input.classList.toggle(
-      "is-invalid",
-      Boolean(error)
-    );
-
-
-    input.classList.toggle(
-      "is-valid",
-      !error && input.value.trim() !== ""
-    );
-
-
-    input.setAttribute(
-      "aria-invalid",
-      Boolean(error)
-    );
-
-
-    const feedback =
-      input.nextElementSibling;
-
-
-    if (
-      feedback &&
-      feedback.classList.contains(
-        "invalid-feedback"
-      )
-    ) {
-
-      feedback.textContent =
-        error;
-
-    }
-
-
-    return !error;
-
-  }
-
-
-  Object.keys(rules).forEach(id => {
-
-    const input =
-      $("#" + id);
-
-    if (!input) return;
-
-
-    input.addEventListener(
-      "input",
-      () => validateField(id)
-    );
-
-  });
-
-
-  /* Character counter */
-
-  const message =
-    $("#message");
-
-  const count =
-    $("#count");
-
-
-  if (message && count) {
-
-    message.addEventListener(
-      "input",
-      () => {
-
-        count.textContent =
-          message.value.length;
-
-      }
-    );
-
-  }
-
-
-  /* Submit */
-
-  form.addEventListener(
-    "submit",
-    event => {
-
-      event.preventDefault();
-
-
-      const alertBox =
-        $("#formAlert");
-
-
-      let valid = true;
-
-
-      Object.keys(rules).forEach(id => {
-
-        if (!validateField(id)) {
-
-          valid = false;
-
-        }
-
-      });
-
-
-      if (!valid) {
-
-        if (alertBox) {
-
-          alertBox.className =
-            "alert alert-danger";
-
-          alertBox.textContent =
-            "Please fix the highlighted fields and try again.";
-
-        }
-
-
-        const firstInvalid =
-          $(".is-invalid", form);
-
-        if (firstInvalid)
-          firstInvalid.focus();
-
-
-        return;
-
-      }
-
-
-      /* Successful demo submission */
-
-      const name =
-        $("#name").value.trim();
-
-
-      if (alertBox) {
-
-        alertBox.className =
-          "alert alert-success";
-
-        alertBox.textContent =
-          `Thank you, ${name}! Your message is ready. (Demo form: no email is sent.)`;
-
-      }
-
-
-      form.reset();
-
-
-      if (count)
-        count.textContent = "0";
-
-
-      $$(".is-valid", form)
-        .forEach(input => {
-
-          input.classList.remove(
-            "is-valid"
-          );
-
-        });
-
-    }
-  );
-
+  const validate=id=>{const input=$("#"+id);const error=rules[id](input.value);input.classList.toggle("is-invalid",Boolean(error));input.classList.toggle("is-valid",!error);input.nextElementSibling.textContent=error;input.setAttribute("aria-invalid",String(Boolean(error)));return !error;};
+  Object.keys(rules).forEach(id=>$("#"+id).addEventListener("input",()=>{validate(id);$("#formAlert").textContent="";$("#formAlert").className="";}));
+  $("#message").addEventListener("input",event=>$("#count").textContent=event.target.value.length);
+  form.addEventListener("submit",event=>{event.preventDefault();let valid=true;Object.keys(rules).forEach(id=>{if(!validate(id))valid=false;});const alertBox=$("#formAlert");if(valid){alertBox.className="alert alert-success";alertBox.textContent=`Thank you, ${$("#name").value.trim()}! Your message is ready. (Demo form: no email is sent.)`;form.reset();$("#count").textContent="0";$$('.is-valid',form).forEach(input=>input.classList.remove("is-valid"));}else{alertBox.className="alert alert-danger";alertBox.textContent="Please fix the highlighted fields and try again.";const first=$(".is-invalid",form);if(first)first.focus();}});
 }
 
-
-/* =========================================================
-   DESKTOP / MOBILE PREVIEW
-   ========================================================= */
-
-function initPreview() {
-
-  const buttons =
-    $$(".preview-btn");
-
-
-  if (!buttons.length)
-    return;
-
-
-  buttons.forEach(button => {
-
-    button.addEventListener(
-      "click",
-      () => {
-
-        const mode =
-          button.dataset.preview;
-
-
-        /* Remove old mode */
-
-        document.body.classList.remove(
-          "preview-desktop",
-          "preview-mobile"
-        );
-
-
-        /* Add selected mode */
-
-        document.body.classList.add(
-          `preview-${mode}`
-        );
-
-
-        /* Active button */
-
-        buttons.forEach(btn => {
-
-          btn.classList.toggle(
-            "active",
-            btn === button
-          );
-
-        });
-
-
-        /* Status text */
-
-        const status =
-          $("#previewStatus");
-
-
-        if (status) {
-
-          status.textContent =
-            mode === "mobile"
-              ? "Mobile Preview"
-              : "Desktop Preview";
-
-        }
-
-      }
-    );
-
-  });
-
-
-  /* Default */
-
-  document.body.classList.add(
-    "preview-desktop"
-  );
-
+function initPreview(){
+  const desktop=$("#desktopPreviewBtn"),mobile=$("#mobilePreviewBtn");if(!desktop||!mobile)return;
+  const set=mode=>{const isMobile=mode==="mobile";document.body.classList.toggle("preview-mobile",isMobile);desktop.classList.toggle("active",!isMobile);mobile.classList.toggle("active",isMobile);desktop.setAttribute("aria-pressed",String(!isMobile));mobile.setAttribute("aria-pressed",String(isMobile));};
+  desktop.addEventListener("click",()=>set("desktop"));mobile.addEventListener("click",()=>set("mobile"));
 }
 
-
-/* =========================================================
-   SCROLL REVEAL + SKILL BARS
-   ========================================================= */
-
-function initScrollEffects() {
-
-  const sections =
-    $$("main section");
-
-
-  if (!sections.length)
-    return;
-
-
-  if ("IntersectionObserver" in window) {
-
-    const observer =
-      new IntersectionObserver(
-        entries => {
-
-          entries.forEach(entry => {
-
-            if (!entry.isIntersecting)
-              return;
-
-
-            entry.target.classList.add(
-              "show"
-            );
-
-
-            /* Animate skill bars */
-
-            $$(
-              "[data-w]",
-              entry.target
-            ).forEach(bar => {
-
-              bar.style.width =
-                bar.dataset.w + "%";
-
-            });
-
-          });
-
-        },
-        {
-          threshold: 0.15
-        }
-      );
-
-
-    sections.forEach(section => {
-
-      section.classList.add(
-        "reveal"
-      );
-
-      observer.observe(
-        section
-      );
-
-    });
-
-  } else {
-
-    sections.forEach(section => {
-
-      section.classList.add(
-        "show"
-      );
-
-    });
-
-  }
-
+function initEffects(){
+  if(reduceMotion)return;
+  document.addEventListener("mousemove",event=>{const card=event.target.closest(".glass:not(.hero-card)");if(!card)return;const rect=card.getBoundingClientRect();if(rect.width>500)return;const x=(event.clientX-rect.left)/rect.width-.5;const y=(event.clientY-rect.top)/rect.height-.5;card.style.transform=`perspective(700px) rotateY(${x*3}deg) rotateX(${-y*3}deg) translateY(-2px)`;});
+  document.addEventListener("mouseleave",()=>$$('.glass').forEach(card=>card.style.transform=""));
 }
 
-
-/* =========================================================
-   NAVBAR ACTIVE LINK
-   ========================================================= */
-
-function initNavigation() {
-
-  const links =
-    $$(".nav-link");
-
-
-  if (!links.length)
-    return;
-
-
-  if ("IntersectionObserver" in window) {
-
-    const observer =
-      new IntersectionObserver(
-        entries => {
-
-          entries.forEach(entry => {
-
-            if (!entry.isIntersecting)
-              return;
-
-
-            links.forEach(link => {
-
-              const active =
-                link.getAttribute("href") ===
-                "#" + entry.target.id;
-
-
-              link.classList.toggle(
-                "active",
-                active
-              );
-
-            });
-
-          });
-
-        },
-        {
-          rootMargin:
-            "-40% 0px -50% 0px"
-        }
-      );
-
-
-    $$("main section")
-      .forEach(section =>
-        observer.observe(section)
-      );
-
-  }
-
-
-  /* Close mobile navbar after clicking */
-
-  links.forEach(link => {
-
-    link.addEventListener(
-      "click",
-      () => {
-
-        const menu =
-          $("#mainMenu");
-
-
-        if (
-          menu &&
-          menu.classList.contains("show") &&
-          window.bootstrap
-        ) {
-
-          bootstrap.Collapse
-            .getOrCreateInstance(menu)
-            .hide();
-
-        }
-
-      }
-    );
-
-  });
-
-}
-
-
-/* =========================================================
-   SCROLL PROGRESS
-   ========================================================= */
-
-function initScrollProgress() {
-
-  const progress =
-    $("#progress");
-
-
-  if (!progress)
-    return;
-
-
-  window.addEventListener(
-    "scroll",
-    () => {
-
-      const documentHeight =
-        document.documentElement.scrollHeight;
-
-      const windowHeight =
-        window.innerHeight;
-
-      const max =
-        documentHeight - windowHeight;
-
-
-      if (max <= 0) {
-
-        progress.style.width =
-          "0%";
-
-        return;
-
-      }
-
-
-      const percentage =
-        (window.scrollY / max) * 100;
-
-
-      progress.style.width =
-        `${percentage}%`;
-
-    },
-    {
-      passive: true
-    }
-  );
-
-}
-
-
-/* =========================================================
-   BACK TO TOP
-   ========================================================= */
-
-function initBackToTop() {
-
-  const button =
-    $("#topBtn");
-
-
-  if (!button)
-    return;
-
-
-  window.addEventListener(
-    "scroll",
-    () => {
-
-      button.hidden =
-        window.scrollY < 500;
-
-    },
-    {
-      passive: true
-    }
-  );
-
-
-  button.addEventListener(
-    "click",
-    () => {
-
-      window.scrollTo({
-        top: 0,
-        behavior:
-          reduceMotion
-            ? "auto"
-            : "smooth"
-      });
-
-    }
-  );
-
-}
-
-
-/* =========================================================
-   BUTTON RIPPLE EFFECT
-   ========================================================= */
-
-function initButtonEffects() {
-
-  if (reduceMotion)
-    return;
-
-
-  document.addEventListener(
-    "click",
-    event => {
-
-      const button =
-        event.target.closest(
-          ".btn-primary-custom, .btn-outline-custom"
-        );
-
-
-      if (!button)
-        return;
-
-
-      const rect =
-        button.getBoundingClientRect();
-
-
-      const size =
-        Math.max(
-          rect.width,
-          rect.height
-        );
-
-
-      const ripple =
-        document.createElement(
-          "span"
-        );
-
-
-      ripple.className =
-        "ripple";
-
-
-      ripple.style.width =
-        `${size}px`;
-
-      ripple.style.height =
-        
+document.addEventListener("DOMContentLoaded",()=>{
+  renderSkills();
+  renderProjects();
+  renderCerts();
+  setGreeting();
+  startTyping();
+  initScroll();
+  initForm();
+  initPreview();
+  initEffects();
+});
