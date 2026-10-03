@@ -3,230 +3,164 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Jujjuru Jahnavi - Computer Science Engineering student portfolio">
+  <title>Jahnavi | CSE Student Portfolio</title>
 
-  <meta
-    name="description"
-    content="Jujjuru Jahnavi - Computer Science Engineering Student Portfolio"
-  >
-
-  <title>Jujjuru Jahnavi | Portfolio</title>
-
-  <!-- Bootstrap -->
-  <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-    rel="stylesheet"
-  >
-
-  <!-- Bootstrap Icons -->
-  <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
-    rel="stylesheet"
-  >
-
-  <!-- Your CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-  <!-- Skip link for accessibility -->
-  <a class="skip-link" href="#main">Skip to content</a>
+<a class="skip" href="#main">Skip to content</a>
+<div id="progress" aria-hidden="true"></div>
 
-  <!-- Portfolio wrapper -->
-  <div id="portfolioApp">
+<div id="portfolioApp">
 
-    <!-- ================= NAVBAR ================= -->
-    <nav
-      class="navbar navbar-expand-lg navbar-light bg-white fixed-top portfolio-nav"
-      aria-label="Main navigation"
-    >
+  <!-- NAVBAR -->
+  <header>
+    <nav class="navbar navbar-expand-lg sticky-top glass-nav" aria-label="Main navigation">
       <div class="container">
 
-        <a class="navbar-brand fw-bold brand" href="#home">
-          JAHNAVI
-        </a>
+        <a class="navbar-brand brand" href="#home">JAHNAVI</a>
 
         <button
           class="navbar-toggler"
           type="button"
           data-bs-toggle="collapse"
-          data-bs-target="#mainMenu"
-          aria-controls="mainMenu"
+          data-bs-target="#menu"
+          aria-controls="menu"
           aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
+          aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse" id="mainMenu">
-
+        <div class="collapse navbar-collapse" id="menu">
           <ul class="navbar-nav ms-auto align-items-lg-center">
 
-            <li class="nav-item">
-              <a class="nav-link" href="#home">Home</a>
-            </li>
-
-            <li class="nav-item">
-              <a class="nav-link" href="#about">About</a>
-            </li>
-
-            <li class="nav-item">
-              <a class="nav-link" href="#education">Education</a>
-            </li>
-
-            <li class="nav-item">
-              <a class="nav-link" href="#skills">Skills</a>
-            </li>
-
-            <li class="nav-item">
-              <a class="nav-link" href="#projects">Projects</a>
-            </li>
-
-            <li class="nav-item">
-              <a class="nav-link" href="#certifications">
-                Certifications
-              </a>
-            </li>
-
-            <li class="nav-item">
-              <a class="nav-link" href="#achievements">
-                Achievements
-              </a>
-            </li>
-
-            <li class="nav-item">
-              <a class="nav-link" href="#contact">
-                Contact
-              </a>
-            </li>
+            <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="#about">About Me</a></li>
+            <li class="nav-item"><a class="nav-link" href="#education">Education</a></li>
+            <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+            <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+            <li class="nav-item"><a class="nav-link" href="#achievements">Achievements</a></li>
+            <li class="nav-item"><a class="nav-link" href="#certifications">Certifications</a></li>
+            <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
+            <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
 
           </ul>
-
         </div>
+
       </div>
     </nav>
+  </header>
 
 
-    <!-- ================= MAIN ================= -->
-    <main id="main">
+  <main id="main">
 
-      <!-- ================= HOME ================= -->
-      <section id="home" class="hero-section">
+    <!-- HOME -->
+    <section id="home" class="hero" aria-labelledby="heroTitle">
 
-        <div class="container">
+      <div class="container">
 
-          <div class="row align-items-center min-vh-100 g-5">
+        <div class="row align-items-center g-5 min-vh-100 py-5">
 
-            <!-- Hero text -->
-            <div class="col-lg-7">
+          <div class="col-lg-7 text-center text-lg-start">
 
-              <p id="greeting" class="eyebrow">
-                Welcome to my portfolio
-              </p>
+            <p id="greeting" class="greet">
+              Welcome to my portfolio
+            </p>
 
-              <h1>
-                Hi, I'm
-                <span class="accent">
-                  Jujjuru Jahnavi
-                </span>
-              </h1>
+            <h1 id="heroTitle">
+              Hi, I'm <span>Jahnavi</span>
+            </h1>
 
-              <h2 class="hero-role">
-                <span id="typedRole">
-                  Computer Science Engineering Student
-                </span>
-                <span class="cursor">|</span>
-              </h2>
+            <h2 class="role">
+              <span id="typed">Computer Science Engineering Student</span>
+              <span class="cursor" aria-hidden="true">|</span>
+            </h2>
 
-              <p class="hero-text">
-                I am a Computer Science Engineering student interested
-                in software development, web technologies and
-                AI-based applications.
-              </p>
+            <p class="hero-description">
+              A Computer Science Engineering student interested in software
+              development, web technologies and AI-based applications.
+            </p>
 
-              <div class="hero-actions">
+            <div class="d-flex flex-wrap gap-3 justify-content-center justify-content-lg-start mt-4">
 
-                <a
-                  href="#projects"
-                  class="btn btn-primary-custom"
-                >
-                  View My Projects
-                </a>
+              <a href="#projects" class="btn btn-glow btn-lg">
+                View My Projects
+              </a>
 
-                <a
-                  href="#contact"
-                  class="btn btn-outline-custom"
-                >
-                  Contact Me
-                </a>
-
-              </div>
-
-
-              <!-- Desktop / Mobile preview -->
-              <div
-                class="preview-tools"
-                aria-label="Portfolio preview controls"
-              >
-
-                <span class="preview-label">
-                  Preview:
-                </span>
-
-                <button
-                  type="button"
-                  class="preview-btn active"
-                  data-preview="desktop"
-                >
-                  Desktop
-                </button>
-
-                <button
-                  type="button"
-                  class="preview-btn"
-                  data-preview="mobile"
-                >
-                  Mobile
-                </button>
-
-                <span
-                  id="previewStatus"
-                  class="preview-status"
-                >
-                  Desktop Preview
-                </span>
-
-              </div>
+              <a href="#contact" class="btn btn-outline-glow btn-lg">
+                Contact Me
+              </a>
 
             </div>
 
+            <!-- DESKTOP / MOBILE PREVIEW -->
+            <div class="preview-tools mt-4" aria-label="Portfolio preview controls">
 
-            <!-- Hero card -->
-            <div class="col-lg-5">
+              <span class="preview-label">Preview:</span>
 
-              <div class="hero-card">
+              <button
+                id="desktopPreviewBtn"
+                class="btn btn-sm btn-outline-glow active"
+                type="button"
+                aria-pressed="true">
+                Desktop
+              </button>
 
-                <div class="hero-icon">
-                  <i class="bi bi-code-slash"></i>
+              <button
+                id="mobilePreviewBtn"
+                class="btn btn-sm btn-outline-glow"
+                type="button"
+                aria-pressed="false">
+                Mobile
+              </button>
+
+            </div>
+
+          </div>
+
+
+          <div class="col-lg-5">
+
+            <div class="hero-card glass" aria-label="Portfolio introduction">
+
+              <div class="hero-initial" aria-hidden="true">
+                J
+              </div>
+
+              <h3 class="h4 mb-2">
+                Computer Science Engineering
+              </h3>
+
+              <p class="mb-3">
+                Stanley College of Engineering and Technology for Women
+              </p>
+
+              <div class="hero-pills">
+                <span>Web Development</span>
+                <span>AI / ML</span>
+                <span>Python</span>
+                <span>Java</span>
+              </div>
+
+              <div class="mini-stats mt-4">
+
+                <div>
+                  <strong>2027</strong>
+                  <span>Graduation</span>
                 </div>
 
-                <h3>
-                  Building with code
-                </h3>
+                <div>
+                  <strong>5</strong>
+                  <span>Projects</span>
+                </div>
 
-                <p>
-                  Web development • AI • Data-driven applications
-                </p>
-
-                <div class="mini-grid">
-
-                  <span>Python</span>
-                  <span>Java</span>
-                  <span>C</span>
-                  <span>HTML</span>
-                  <span>CSS</span>
-                  <span>JavaScript</span>
-
+                <div>
+                  <strong>8.33</strong>
+                  <span>CGPA</span>
                 </div>
 
               </div>
@@ -237,103 +171,105 @@
 
         </div>
 
-      </section>
+      </div>
+
+    </section>
 
 
-      <!-- ================= ABOUT ================= -->
-      <section id="about" class="section">
+    <!-- ABOUT -->
+    <section id="about" class="py-6" aria-labelledby="aboutTitle">
 
-        <div class="container">
+      <div class="container">
 
-          <div class="section-heading">
+        <div class="section-title">
+          <h2 id="aboutTitle">About Me</h2>
+          <p>A little about my interests and goals.</p>
+        </div>
 
-            <p class="eyebrow">
-              About
-            </p>
+        <div class="row g-4">
 
-            <h2>
-              About Me
-            </h2>
+          <div class="col-lg-6">
+
+            <article class="glass p-4 h-100">
+
+              <h3 class="h5">Who I am</h3>
+
+              <p>
+                I am a Computer Science Engineering student who enjoys
+                turning ideas into practical software. My work includes
+                web technologies and AI-based applications.
+              </p>
+
+              <h3 class="h5 mt-4">Career goals</h3>
+
+              <p class="mb-0">
+                I want to grow as a software developer, build reliable
+                applications that solve real problems, and continue
+                learning modern technologies.
+              </p>
+
+            </article>
 
           </div>
 
 
-          <div class="row g-4">
+          <div class="col-lg-6">
 
-            <div class="col-lg-7">
+            <article class="glass p-4 h-100">
 
-              <article class="card-box h-100">
+              <h3 class="h5">Interests</h3>
 
-                <h3>
-                  Who I am
-                </h3>
+              <ul class="interests">
+                <li>Software development</li>
+                <li>Web technologies</li>
+                <li>Artificial Intelligence</li>
+                <li>Modern technology</li>
+                <li>Building practical software applications</li>
+              </ul>
 
-                <p>
-                  I am a Computer Science Engineering student who
-                  enjoys turning ideas into practical software
-                  applications.
-                </p>
+              <div class="row text-center mt-4 g-2">
 
-                <p>
-                  My interests include web technologies,
-                  artificial intelligence, data structures,
-                  machine learning and application development.
-                </p>
+                <div class="col-4">
+                  <p class="stat" data-count="8.33">0</p>
+                  <p class="small mb-0">CGPA</p>
+                </div>
 
-                <p class="mb-0">
-                  I enjoy learning through projects and using
-                  technology to solve practical problems.
-                </p>
+                <div class="col-4">
+                  <p class="stat" data-count="5">0</p>
+                  <p class="small mb-0">Projects</p>
+                </div>
 
-              </article>
+                <div class="col-4">
+                  <p class="stat" data-count="2027">0</p>
+                  <p class="small mb-0">Graduating</p>
+                </div>
 
-            </div>
+              </div>
 
-
-            <div class="col-lg-5">
-
-              <article class="card-box h-100">
-
-                <h3>
-                  Career Goal
-                </h3>
-
-                <p class="mb-0">
-                  To build strong technical skills, gain practical
-                  experience and grow into a capable software
-                  professional.
-                </p>
-
-              </article>
-
-            </div>
+            </article>
 
           </div>
 
         </div>
 
-      </section>
+      </div>
+
+    </section>
 
 
-      <!-- ================= EDUCATION ================= -->
-      <section id="education" class="section soft-section">
+    <!-- EDUCATION -->
+    <section id="education" class="py-6" aria-labelledby="eduTitle">
 
-        <div class="container">
+      <div class="container">
 
-          <div class="section-heading">
+        <div class="section-title">
+          <h2 id="eduTitle">Education</h2>
+          <p>Academic background.</p>
+        </div>
 
-            <p class="eyebrow">
-              Academic Background
-            </p>
+        <div class="glass p-3 p-md-4">
 
-            <h2>
-              Education
-            </h2>
-
-          </div>
-
-
-          <div class="table-responsive card-box">
+          <div class="table-responsive">
 
             <table class="table align-middle mb-0">
 
@@ -342,35 +278,33 @@
               </caption>
 
               <thead>
-
                 <tr>
                   <th>Degree</th>
                   <th>Branch</th>
                   <th>College</th>
-                  <th>Graduation</th>
+                  <th>Expected Graduation</th>
+                  <th>CGPA</th>
                 </tr>
-
               </thead>
 
               <tbody>
 
                 <tr>
 
+                  <td>Bachelor of Technology (B.Tech)</td>
+
                   <td>
-                    B.Tech
+                    Computer Science and Engineering
                   </td>
 
                   <td>
-                    Computer Science Engineering
+                    Stanley College of Engineering and Technology for Women
                   </td>
 
-                  <td>
-                    Stanley College of Engineering and Technology
-                    for Women
-                  </td>
+                  <td>2027</td>
 
                   <td>
-                    2027
+                    <span class="badge badge-glow">8.33</span>
                   </td>
 
                 </tr>
@@ -383,518 +317,534 @@
 
         </div>
 
-      </section>
+      </div>
+
+    </section>
 
 
-      <!-- ================= SKILLS ================= -->
-      <section id="skills" class="section">
+    <!-- SKILLS -->
+    <section id="skills" class="py-6" aria-labelledby="skillTitle">
 
-        <div class="container">
+      <div class="container">
 
-          <div class="section-heading">
+        <div class="section-title">
+          <h2 id="skillTitle">Skills</h2>
+          <p>Technologies and core computer science skills.</p>
+        </div>
 
-            <p class="eyebrow">
-              Technical Skills
-            </p>
+        <div id="skillGrid" class="row g-4"></div>
 
-            <h2>
-              Skills
-            </h2>
+      </div>
 
-          </div>
+    </section>
 
 
-          <!-- JavaScript renders skills here -->
-          <div
-            id="skillGrid"
-            class="row g-4"
-          ></div>
+    <!-- PROJECTS -->
+    <section id="projects" class="py-6" aria-labelledby="projTitle">
+
+      <div class="container">
+
+        <div class="section-title">
+          <h2 id="projTitle">Projects</h2>
+          <p>Selected academic and personal projects.</p>
+        </div>
+
+        <div
+          id="projFilters"
+          class="d-flex flex-wrap gap-2 mb-4"
+          role="group"
+          aria-label="Filter projects by category">
+        </div>
+
+        <div
+          id="projGrid"
+          class="row g-4"
+          aria-live="polite">
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ACHIEVEMENTS -->
+    <section id="achievements" class="py-6" aria-labelledby="achTitle">
+
+      <div class="container">
+
+        <div class="section-title">
+
+          <h2 id="achTitle">
+            Achievements
+          </h2>
+
+          <p>
+            Highlights and technical activities.
+          </p>
 
         </div>
 
-      </section>
+        <div class="row g-4">
 
+          <!-- INTERNSHIP ACHIEVEMENTS -->
+          <div class="col-12 col-md-6">
 
-      <!-- ================= PROJECTS ================= -->
-      <section id="projects" class="section soft-section">
+            <article class="glass cert h-100">
 
-        <div class="container">
+              <h3 class="h5 mb-2">
+                Internship Achievements
+              </h3>
 
-          <div class="section-heading">
+              <p class="mb-0">
+                Completed internships in AI &amp; Deep Learning,
+                AI/ML, and Web Development, gaining hands-on
+                experience through practical projects.
+              </p>
 
-            <p class="eyebrow">
-              My Work
-            </p>
-
-            <h2>
-              Projects
-            </h2>
-
-            <p>
-              Explore some of my academic and technical projects.
-            </p>
+            </article>
 
           </div>
 
 
-          <!-- Project filters -->
-          <div
-            id="projFilters"
-            class="d-flex flex-wrap gap-2 mb-4"
-            role="group"
-            aria-label="Project filters"
-          ></div>
+          <!-- TECHNICAL ACHIEVEMENTS -->
+          <div class="col-12 col-md-6">
 
+            <article class="glass cert h-100">
 
-          <!-- JavaScript renders projects here -->
-          <div
-            id="projGrid"
-            class="row g-4"
-            aria-live="polite"
-          ></div>
+              <h3 class="h5 mb-2">
+                Technical Achievements
+              </h3>
 
-        </div>
+              <p class="mb-0">
+                Developed projects including EventMood,
+                Product Sentiment Analysis, Music Recommendation
+                System, AgriSmart, and AI Office Suite.
+              </p>
 
-      </section>
-
-
-      <!-- ================= ACHIEVEMENTS ================= -->
-      <section id="achievements" class="section">
-
-        <div class="container">
-
-          <div class="section-heading">
-
-            <p class="eyebrow">
-              Highlights
-            </p>
-
-            <h2>
-              Achievements
-            </h2>
-
-            <p>
-              Internship experience, technical activities and
-              hackathon participation.
-            </p>
+            </article>
 
           </div>
 
 
-          <div class="row g-4">
+          <!-- HACKATHON ACHIEVEMENT -->
+          <div class="col-12 col-md-6">
+
+            <article class="glass cert h-100">
+
+              <h3 class="h5 mb-2">
+                Hackathon Achievement
+              </h3>
+
+              <p class="mb-0">
+                Participated in the Goldman Sachs Hackathon and
+                achieved a HackerRank rank of
+                <strong>4381</strong>.
+              </p>
+
+            </article>
+
+          </div>
 
 
-            <!-- Internship -->
-            <div class="col-md-6">
+          <!-- TECHNICAL ACTIVITIES -->
+          <div class="col-12 col-md-6">
 
-              <article class="card-box h-100">
+            <article class="glass cert h-100">
 
-                <div class="achievement-icon">
-                  <i class="bi bi-briefcase"></i>
-                </div>
+              <h3 class="h5 mb-2">
+                Technical Activities
+              </h3>
 
-                <h3>
-                  Internship Achievements
-                </h3>
+              <p class="mb-0">
+                Participated in technical workshops, internships,
+                hackathons, and hands-on development activities.
+              </p>
 
-                <ul>
-
-                  <li>
-                    Completed Web Development internship experience.
-                  </li>
-
-                  <li>
-                    Completed AI/ML internship experience.
-                  </li>
-
-                  <li>
-                    Gained practical experience through AI and
-                    Deep Learning projects.
-                  </li>
-
-                </ul>
-
-              </article>
-
-            </div>
-
-
-            <!-- Technical -->
-            <div class="col-md-6">
-
-              <article class="card-box h-100">
-
-                <div class="achievement-icon">
-                  <i class="bi bi-code-square"></i>
-                </div>
-
-                <h3>
-                  Technical Achievements
-                </h3>
-
-                <ul>
-
-                  <li>
-                    Developed EventMood for emotion detection.
-                  </li>
-
-                  <li>
-                    Developed Product Sentiment Analysis.
-                  </li>
-
-                  <li>
-                    Developed Music Recommendation System.
-                  </li>
-
-                  <li>
-                    Developed AgriSmart and AI Office Suite.
-                  </li>
-
-                </ul>
-
-              </article>
-
-            </div>
-
-
-            <!-- Hackathons -->
-            <div class="col-md-6">
-
-              <article class="card-box h-100">
-
-                <div class="achievement-icon">
-                  <i class="bi bi-trophy"></i>
-                </div>
-
-                <h3>
-                  Hackathons
-                </h3>
-
-                <ul>
-
-                  <li>
-                    Participated in the Goldman Sachs Hackathon.
-                  </li>
-
-                  <li>
-                    Achieved HackerRank rank 4381 in the
-                    hackathon challenge.
-                  </li>
-
-                </ul>
-
-              </article>
-
-            </div>
-
-
-            <!-- Activities -->
-            <div class="col-md-6">
-
-              <article class="card-box h-100">
-
-                <div class="achievement-icon">
-                  <i class="bi bi-stars"></i>
-                </div>
-
-                <h3>
-                  Activities & Participation
-                </h3>
-
-                <ul>
-
-                  <li>
-                    Participated in technical workshops and
-                    development activities.
-                  </li>
-
-                  <li>
-                    Worked on AI, machine learning and
-                    web-based projects.
-                  </li>
-
-                  <li>
-                    Gained hands-on experience through
-                    internships and project work.
-                  </li>
-
-                </ul>
-
-              </article>
-
-            </div>
+            </article>
 
           </div>
 
         </div>
 
-      </section>
+      </div>
+
+    </section>
 
 
-      <!-- ================= CERTIFICATIONS ================= -->
-      <section id="certifications" class="section soft-section">
+    <!-- CERTIFICATIONS -->
+    <section id="certifications" class="py-6" aria-labelledby="certTitle">
 
-        <div class="container">
+      <div class="container">
 
-          <div class="section-heading">
+        <div class="section-title">
 
-            <p class="eyebrow">
-              Learning
-            </p>
+          <h2 id="certTitle">
+            Certifications
+          </h2>
 
-            <h2>
-              Certifications
-            </h2>
-
-            <p>
-              Courses and certification areas.
-            </p>
-
-          </div>
-
-
-          <!-- Certification filters -->
-          <div
-            id="certFilters"
-            class="d-flex flex-wrap gap-2 mb-4"
-            role="group"
-            aria-label="Certification filters"
-          ></div>
-
-
-          <!-- Certifications rendered by JavaScript -->
-          <div
-            id="certGrid"
-            class="row g-3"
-            aria-live="polite"
-          ></div>
+          <p>
+            Courses and certification areas.
+          </p>
 
         </div>
 
-      </section>
+        <div
+          id="certFilters"
+          class="d-flex flex-wrap gap-2 mb-4"
+          role="group"
+          aria-label="Filter certifications by topic">
+        </div>
+
+        <div
+          id="certGrid"
+          class="row g-3"
+          aria-live="polite">
+        </div>
+
+      </div>
+
+    </section>
 
 
-      <!-- ================= CONTACT ================= -->
-      <section id="contact" class="section">
+    <!-- EXPERIENCE -->
+    <section id="experience" class="py-6" aria-labelledby="expTitle">
 
-        <div class="container">
+      <div class="container">
 
-          <div class="section-heading">
+        <div class="section-title">
 
-            <p class="eyebrow">
-              Get in Touch
-            </p>
+          <h2 id="expTitle">
+            Experience
+          </h2>
 
-            <h2>
-              Contact
-            </h2>
+          <p>
+            Internship and technical experience.
+          </p>
+
+        </div>
+
+        <ol id="expList" class="timeline list-unstyled"></ol>
+
+      </div>
+
+    </section>
+
+
+    <!-- CONTACT -->
+    <section id="contact" class="py-6" aria-labelledby="contactTitle">
+
+      <div class="container">
+
+        <div class="section-title">
+
+          <h2 id="contactTitle">
+            Contact
+          </h2>
+
+          <p>
+            Use the form to send a message.
+          </p>
+
+        </div>
+
+        <div class="row g-4">
+
+          <!-- CONTACT DETAILS -->
+          <div class="col-lg-5">
+
+            <article class="glass p-4 h-100">
+
+              <h3 class="h5">
+                Get in touch
+              </h3>
+
+              <p>
+                <strong>Name:</strong>
+                Jujjuru Jahnavi
+              </p>
+
+              <p>
+                <strong>Email:</strong>
+                Add your email address here
+              </p>
+
+              <p class="mb-2">
+                <strong>Profiles:</strong>
+              </p>
+
+              <div class="d-flex gap-2 flex-wrap">
+
+                <a
+                  class="btn btn-outline-glow btn-sm"
+                  href="https://github.com/j1234567896"
+                  target="_blank"
+                  rel="noopener noreferrer">
+                  GitHub
+                </a>
+
+                <a
+                  class="btn btn-outline-glow btn-sm"
+                  href="https://www.linkedin.com/in/jujjuru-jahnavi-952673357"
+                  target="_blank"
+                  rel="noopener noreferrer">
+                  LinkedIn
+                </a>
+
+              </div>
+
+            </article>
 
           </div>
 
 
-          <div class="row g-4">
+          <!-- CONTACT FORM -->
+          <div class="col-lg-7">
+
+            <form
+              id="contactForm"
+              class="glass p-4"
+              novalidate>
+
+              <div
+                id="formAlert"
+                role="alert"
+                aria-live="polite">
+              </div>
+
+              <div class="mb-3">
+
+                <label for="name" class="form-label">
+                  Name
+                </label>
+
+                <input
+                  type="text"
+                  id="name"
+                  class="form-control"
+                  autocomplete="name">
+
+                <div class="invalid-feedback"></div>
+
+              </div>
 
 
-            <!-- Contact information -->
-            <div class="col-lg-5">
+              <div class="mb-3">
 
-              <article class="card-box contact-info h-100">
+                <label for="email" class="form-label">
+                  Email
+                </label>
 
-                <h3>
-                  Let's connect
-                </h3>
+                <input
+                  type="email"
+                  id="email"
+                  class="form-control"
+                  autocomplete="email">
 
-                <p>
-                  If you would like to discuss a project,
-                  internship opportunity or collaboration,
-                  you can connect with me through my
-                  professional profiles.
-                </p>
+                <div class="invalid-feedback"></div>
 
-
-                <div class="contact-links">
-
-                  <a
-                    href="https://github.com/j1234567896"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="contact-link"
-                  >
-                    <i class="bi bi-github"></i>
-                    GitHub
-                  </a>
+              </div>
 
 
-                  <a
-                    href="https://www.linkedin.com/in/jujjuru-jahnavi-952673357"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="contact-link"
-                  >
-                    <i class="bi bi-linkedin"></i>
-                    LinkedIn
-                  </a>
+              <div class="mb-3">
 
-                </div>
+                <label for="subject" class="form-label">
+                  Subject
+                </label>
 
-              </article>
+                <input
+                  type="text"
+                  id="subject"
+                  class="form-control">
 
-            </div>
+                <div class="invalid-feedback"></div>
 
-
-            <!-- Contact form -->
-            <div class="col-lg-7">
-
-              <article class="card-box">
-
-                <div
-                  id="formAlert"
-                  class="alert d-none"
-                  role="alert"
-                  aria-live="polite"
-                ></div>
+              </div>
 
 
-                <form
-                  id="contactForm"
-                  novalidate
-                >
+              <div class="mb-1">
+
+                <label for="message" class="form-label">
+                  Message
+                </label>
+
+                <textarea
+                  id="message"
+                  rows="4"
+                  class="form-control"
+                  maxlength="500"></textarea>
+
+                <div class="invalid-feedback"></div>
+
+              </div>
 
 
-                  <!-- Name -->
-                  <div class="mb-3">
+              <p class="small text-end">
+                <span id="count">0</span>/500
+              </p>
 
-                    <label
-                      for="name"
-                      class="form-label"
-                    >
-                      Name *
-                    </label>
+              <button
+                type="submit"
+                class="btn btn-glow">
+                Send Message
+              </button>
 
-                    <input
-                      id="name"
-                      name="name"
-                      type="text"
-                      class="form-control"
-                      autocomplete="name"
-                    >
-
-                    <div class="invalid-feedback"></div>
-
-                  </div>
-
-
-                  <!-- Email -->
-                  <div class="mb-3">
-
-                    <label
-                      for="email"
-                      class="form-label"
-                    >
-                      Email *
-                    </label>
-
-                    <input
-                      id="email"
-                      name="email"
-                      type="email"
-                      class="form-control"
-                      autocomplete="email"
-                    >
-
-                    <div class="invalid-feedback"></div>
-
-                  </div>
-
-
-                  <!-- Subject -->
-                  <div class="mb-3">
-
-                    <label
-                      for="subject"
-                      class="form-label"
-                    >
-                      Subject *
-                    </label>
-
-                    <input
-                      id="subject"
-                      name="subject"
-                      type="text"
-                      class="form-control"
-                    >
-
-                    <div class="invalid-feedback"></div>
-
-                  </div>
-
-
-                  <!-- Message -->
-                  <div class="mb-2">
-
-                    <label
-                      for="message"
-                      class="form-label"
-                    >
-                      Message *
-                    </label>
-
-                    <textarea
-                      id="message"
-                      name="message"
-                      rows="5"
-                      maxlength="500"
-                      class="form-control"
-                    ></textarea>
-
-                    <div class="invalid-feedback"></div>
-
-                  </div>
-
-
-                  <!-- Character counter -->
-                  <div class="text-end small text-secondary mb-3">
-
-                    <span id="count">
-                      0
-                    </span>
-
-                    /500
-
-                  </div>
-
-
-                  <button
-                    type="submit"
-                    class="btn btn-primary-custom"
-                  >
-                    <i class="bi bi-send"></i>
-                    Send Message
-                  </button>
-
-                </form>
-
-              </article>
-
-            </div>
+            </form>
 
           </div>
 
         </div>
 
-      </section>
+      </div>
 
-    </main>
+    </section>
+
+  </main>
 
 
-    <!-- ================= FOOTER ================= -->
-    <footer class="footer">
+  <!-- FOOTER -->
+  <footer class="py-5 footer">
 
-      <div class="container text-center">
+    <div class="container">
 
-        <h2>
-          Jujjuru Jahnavi
+      <div class="row g-4">
+
+        <div class="col-md-4">
+
+          <p class="brand fs-4 mb-1">
+            JAHNAVI
+          </p>
+
+          <p>
+            Computer Science Engineering Student
+          </p>
+
+        </div>
+
+
+        <div class="col-md-4">
+
+          <h2 class="h6">
+            Quick links
+          </h2>
+
+          <ul class="list-unstyled footer-links">
+
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+
+          </ul>
+
+        </div>
+
+
+        <div class="col-md-4">
+
+          <h2 class="h6">
+            Connect
+          </h2>
+
+          <p>
+            <a
+              href="https://github.com/j1234567896"
+              target="_blank"
+              rel="noopener noreferrer">
+              GitHub
+            </a>
+          </p>
+
+          <p>
+            <a
+              href="https://www.linkedin.com/in/jujjuru-jahnavi-952673357"
+              target="_blank"
+              rel="noopener noreferrer">
+              LinkedIn
+            </a>
+          </p>
+
+        </div>
+
+      </div>
+
+      <hr>
+
+      <p class="text-center mb-0">
+        &copy; 2026 Jahnavi. All Rights Reserved.
+      </p>
+
+    </div>
+
+  </footer>
+
+</div>
+
+
+<!-- BACK TO TOP -->
+<button
+  id="topBtn"
+  class="btn btn-glow"
+  type="button"
+  aria-label="Back to top"
+  hidden>
+  Top
+</button>
+
+
+<!-- PROJECT MODAL -->
+<div
+  class="modal fade"
+  id="projModal"
+  tabindex="-1"
+  aria-labelledby="modalTitle"
+  aria-hidden="true">
+
+  <div class="modal-dialog modal-dialog-centered">
+
+    <div class="modal-content glass">
+
+      <div class="modal-header">
+
+        <h2
+          class="modal-title h5"
+          id="modalTitle">
         </h2>
 
-        <p>
-          Computer Sci
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close">
+        </button>
+
+      </div>
+
+      <div class="modal-body">
+
+        <span
+          id="modalCat"
+          class="badge badge-glow mb-2">
+        </span>
+
+        <p id="modalDesc"></p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- BOOTSTRAP + YOUR JAVASCRIPT -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>
+                
+           
+           
